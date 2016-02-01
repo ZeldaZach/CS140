@@ -74,7 +74,7 @@ public class Student {
 	public double computeSemesterGPA()
 	{
 		double gpa = 0.0;
-		int totalPoints = 0;
+		double totalPoints = 0.0;
 		int totalCredits = 0;
 		
 		Class class1 = getClass1();
@@ -93,7 +93,7 @@ public class Student {
 		totalCredits += class4.getNumCredits();
 		
 		if (totalCredits > 0)
-			gpa = 1.0 * totalPoints / totalCredits;
+			gpa = totalPoints / totalCredits;
 
 		return gpa;
 	}
