@@ -1,4 +1,3 @@
-* # Ignore everything
-!*/ # White list directories
-
+*
+!*/
 !*.java
