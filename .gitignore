@@ -2,6 +2,7 @@
 *.bluej
 *.ctxt
 *.tar.gz
+*.zip
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
