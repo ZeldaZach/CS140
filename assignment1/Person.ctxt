@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.params=aLastName\ aFirstName\ aMiddleInitial
+comment0.target=Person(java.lang.String,\ java.lang.String,\ char)
+comment1.params=
+comment1.target=java.lang.String\ getFirstName()
+comment2.params=
+comment2.target=java.lang.String\ getLastName()
+comment3.params=
+comment3.target=char\ getMiddleInitial()
+numComments=4

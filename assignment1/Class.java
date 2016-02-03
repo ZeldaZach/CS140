@@ -1,4 +1,4 @@
-package assignment01;
+ 
 
 public class Class {
 	private String name;

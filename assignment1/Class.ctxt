@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.params=aName\ aNumber\ aNumCredits\ aCrn
+comment0.target=Class(java.lang.String,\ java.lang.String,\ int,\ int)
+comment1.params=
+comment1.target=java.lang.String\ getName()
+comment10.params=aCrn
+comment10.target=void\ setCrn(int)
+comment2.params=
+comment2.target=java.lang.String\ getNumber()
+comment3.params=
+comment3.target=int\ getNumCredits()
+comment4.params=
+comment4.target=int\ getCrn()
+comment5.params=
+comment5.target=double\ getQualPoints()
+comment6.params=qPoints
+comment6.target=void\ setQualPoints(double)
+comment7.params=aName
+comment7.target=void\ setName(java.lang.String)
+comment8.params=aNumber
+comment8.target=void\ setNumber(java.lang.String)
+comment9.params=aNumCredits
+comment9.target=void\ setNumCredits(int)
+numComments=11
