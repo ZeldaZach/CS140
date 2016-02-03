@@ -1,4 +1,4 @@
- 
+package assignment01;
 
 public class Person {
 	private String lastName;
