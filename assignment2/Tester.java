@@ -146,7 +146,7 @@ public class Tester
 		/* Initialize All Instances */
 		InstanceMethodVersion testNull = new InstanceMethodVersion(null);
 		InstanceMethodVersion testEmpty = new InstanceMethodVersion("");
-		final InstanceMethodVersion testSpaces = new InstanceMethodVersion("  Welcome to the   house! ");
+		InstanceMethodVersion testSpaces = new InstanceMethodVersion("  Welcome to the   house! ");
 		InstanceMethodVersion testWordy = new InstanceMethodVersion("How many cows in a liter of cheese doodles?");
 		
 		/* testNull Instance Tests */
