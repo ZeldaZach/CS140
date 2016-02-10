@@ -1,6 +1,7 @@
 package assignment02;
 
 import java.util.Arrays;
+import java.awt.Rectangle;
 
 public class Tester
 {
@@ -15,6 +16,10 @@ public class Tester
 		Object[] test = {};
 		System.out.println("Expected value 0");
 		System.out.println("Returned value " + Utilities02.countNulls(test) + "\n");
+		
+		Object[] test2 = {new Rectangle(10,10,30,20), null, new Rectangle(10,40), "Hello!", null};
+		System.out.println("Expected value 2");
+		System.out.println("Returned value " + Utilities02.countNulls(test2) + "\n");
 
 		/* countSpaces Test */
 		System.out.println("** countSpaces Test **");
