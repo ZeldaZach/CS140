@@ -74,6 +74,10 @@ public class Elevator
 		return returnVal;
 	}
 	
+	/**
+	* @param String with floor number (is a number, but in string format)
+	* @return human readable version of what floor the elevator is on
+	*/
 	public int getFloorIndex(String floor)
 	{
 		if (floor.equals("G"))
@@ -107,6 +111,15 @@ public class Elevator
 		lines.set(floor, ln);
 	}
 	
+	/**
+	* Move the elevator up or down one floor when called upon
+	* Will check for which way the elevator is going
+	* Then will see if it should still go up (did it reach the top?) /
+	* Still go down (did it reach the bottom?)
+	* Then it offloads all passengers who want to get off at currentFloor
+	* Finally, if thisLine is not null, it will attempt to load passengers
+	* Who want to go in the same direction the elevator is going
+	*/
 	public void move()
 	{
 		if (currentDir == Direction.UP)
@@ -142,14 +155,13 @@ public class Elevator
 		
 		for (Passenger p : temp)
 		{
-			if (p.getDestinationFloor().equals(this.getFloorIndex("" + getCurrentFloor())))
+			if (p.getDestinationFloor().equals(getFloorName(getCurrentFloor())))
 			{
 				occupants.remove(p);
 			}
 		}
 		
-		
-		Line thisLine = lines.get(getCurrentFloor());
+		Line thisLine = lines.get(getCurrentFloor()); // The line waiting outside the elevator at floor X
 		if (thisLine != null)
 			thisLine.loadElevator();
 	}

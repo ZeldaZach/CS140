@@ -17,6 +17,12 @@ public class Line
 		elev.addLine(flr, this);
 	}
 	
+	public void addToLine(Passenger... p)
+	{
+		for (int i = 0; i < p.length; i++)
+			line.add(p[i]);
+	}
+	
 	public ArrayList<Passenger> getLine()
 	{
 		return line;
