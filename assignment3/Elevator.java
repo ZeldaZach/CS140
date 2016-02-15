@@ -75,6 +75,8 @@ public class Elevator
 	}
 	
 	/**
+	* This will return to the user, in numbers, what their floor number
+	* actually is. The lowest basement is 0 and you work your way up
 	* @param String with floor number (is a number, but in string format)
 	* @return human readable version of what floor the elevator is on
 	*/

@@ -77,12 +77,35 @@ public class Visualizer
 		Passenger pass19 = new Passenger("5", ele1);
 		Passenger pass20 = new Passenger("9", ele1);
 		
-		line1.addToLine(pass1, pass2, pass3, pass4, pass5, pass6, pass7, pass8, pass9, pass10, pass11, pass12);
-		line2.addToLine(pass13, pass14);
-		line3.addToLine(pass15);
-		line4.addToLine(pass16, pass17);
-		line5.addToLine(pass18);
-		line6.addToLine(pass19, pass20);
+		line1.getLine().add(pass1);
+		line1.getLine().add(pass2);
+		line1.getLine().add(pass3);
+		line1.getLine().add(pass4);
+		line1.getLine().add(pass5);
+		line1.getLine().add(pass6);
+		
+		line2.getLine().add(pass7);
+		line2.getLine().add(pass8);
+		line2.getLine().add(pass9);
+		
+		line3.getLine().add(pass10);
+		
+		line4.getLine().add(pass11);
+		line4.getLine().add(pass12);
+		
+		line5.getLine().add(pass13);
+		
+		line6.getLine().add(pass14);
+		line7.getLine().add(pass15);
+		
+		line8.getLine().add(pass16);
+		line8.getLine().add(pass17);
+		
+		line10.getLine().add(pass19);
+		
+		line11.getLine().add(pass20);
+
+		line14.getLine().add(pass18);		
 		
 		showElev(ele1);
 		line1.loadElevator();
