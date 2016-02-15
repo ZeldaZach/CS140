@@ -1,6 +1,5 @@
 package assignment03;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Visualizer
@@ -20,7 +19,7 @@ public class Visualizer
 			
 			if (i == e.getCurrentFloor())
 			{
-				// Bold&Color from StackOverflow to help easier determine what floor elevator is on
+				// Bold & Color from StackOverflow to help easier determine what floor elevator is on
 				// https://stackoverflow.com/questions/1448858/how-to-color-system-out-println-output
 				// https://stackoverflow.com/questions/8510398/make-the-input-text-bold-when-reading-from-the-console
 
