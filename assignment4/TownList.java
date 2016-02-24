@@ -37,18 +37,28 @@ public class TownList implements List<Town>
 
 	public void add(int index, Town element)
 	{
-		
-		if (index > -1 && index < list.size())
+		try
 		{
-			try
-			{	
-				if (!list.contains(element))
-						list.add(index, element);
-			}
-			catch (Exception e)
+			if (!list.contains(element))
 			{
-				throw(e);
+				if (index > -1 && index < list.size())
+				{
+					list.add(index, element);
+				}
+				else if (index < 0)
+				{
+					list.add(0, element);
+				}
+				else if (index > list.size())
+				{
+					list.add(list.size(), element);
+				}
 			}
+		}
+		catch (Exception e)
+		{
+			System.out.println(e);
+			throw(e);
 		}
 	}
 	

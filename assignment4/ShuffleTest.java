@@ -72,7 +72,7 @@ public class ShuffleTest
 			if (divident != 1) // Prevent divide by 0 error if only 1 row/col
 				divident -= 1;
 			
-			sDev = Math.sqrt(total_submation) / divident;
+			sDev = Math.sqrt(total_submation / divident);
 			
 			System.out.println("SDev: " + sDev);
 		}

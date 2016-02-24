@@ -31,19 +31,25 @@ public class TownListTester
 		System.out.println(list.add(town3));
 		System.out.println(list.add(town1)); // Repeat value
  		System.out.println(list.add(null)); // Null value
-		System.out.println("List using add(Town): " + list);
+		
+		System.out.println("Expected: [Lima, Peru; Williamsport, PA, USA; London, UK]");
+		System.out.println("List using add(Town): " + list + "\n");
 		
 		list.add(2, town4);
-		list.add(8, town5); // Index out of bounds value
-		list.add(3, town5);
-		System.out.println("List using add(index, Town): " + list);
+		list.add(8, town5); // Index out of bounds value (So add to end of list instead)
+		list.add(3, town5); // Repeat value
+		
+		System.out.println("Expected: [Lima, Peru; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India]");
+		System.out.println("List using add(index, Town): " + list + "\n");
 		
 		list.addAll(null);
 
-		list.addAll(alist);		
-		System.out.println("List using addAll(ArrayList): " + list);
+		list.addAll(alist);
+		System.out.println("Expected: [Lima, Peru; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India; Beijing, China; Valencia, Spain; Christchurch, New Zealand]");
+		System.out.println("List using addAll(ArrayList): " + list + "\n");
 
 		list.addAll(1, alist2);
-		System.out.println("List using addAll(index, ArrayList): " + list);
+		System.out.println("Expected: [Lima, Peru; New York City, NY, USA; New Orleans, LI, USA; Jackson, MS, USA; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India; Beijing, China; Valencia, Spain; Christchurch, New Zealand]");
+		System.out.println("List using addAll(index, ArrayList): " + list + "\n");
 	}
 }

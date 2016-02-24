@@ -72,7 +72,6 @@ public class Geometry
 				{
 					continue;
 				}
-				
 
 				if (tmp[i].getX() >= tmp[j].getX())
 				{
