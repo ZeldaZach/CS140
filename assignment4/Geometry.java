@@ -18,7 +18,9 @@ public class Geometry
 		
 		System.out.println("Input List: " + test2);
 		reduce(test2);
+		System.out.println("Expected Reduced List: [Point2D.Double[1.0, 2.0], Point2D.Double[9.0, 9.0]]");
 		System.out.println("Reduced List: " + test2);
+		System.out.println("Expected Area: (9-2)*(9-1) = 56");
 		System.out.println("Min Area: " + area(test2) + "\n");
 		
 		// Test with 3 cases remaining
@@ -35,7 +37,9 @@ public class Geometry
 		
 		System.out.println("Input List: " + test3);
 		reduce(test3);
+		System.out.println("Expected Reduced List: [Point2D.Double[0.0, 0.0], Point2D.Double[11.0, 10.0], Point2D.Double[1.0, 1000.0]]");
 		System.out.println("Reduced List: " + test3);
+		System.out.println("Expected Area: (1000-0)*(11-0) = 11000");
 		System.out.println("Min Area: " + area(test3) + "\n");
 		
 		// Test with 4 cases remaining
@@ -48,7 +52,9 @@ public class Geometry
 		
 		System.out.println("Input List: " + test4);
 		reduce(test4);
+		System.out.println("Expected Reduced List: [Point2D.Double[1.0, 1.0], Point2D.Double[3.0, 10.0], Point2D.Double[20.0, 5.0], Point2D.Double[5.0, 0.0]]");
 		System.out.println("Reduced List: " + test4);
+		System.out.println("Expected Area: (10-0)*(20-1) = 190");
 		System.out.println("Min Area: " + area(test4) + "\n");
 	}
 	
@@ -57,38 +63,36 @@ public class Geometry
 		if (list == null || list.size() < 2)
 			throw new IllegalArgumentException("List not long enough");
 		
-		Point2D.Double[] tmp = list.toArray(new Point2D.Double[0]);
-		
-		for(int i = 0; i < tmp.length; i++)
+		for (int i = 0; i < list.size(); i++)
 		{
 			boolean test1 = false;
 			boolean test2 = false;
 			boolean test3 = false;
 			boolean test4 = false;
-			
-			for (int j = 0; j < tmp.length; j++)
+				
+			for (int j = 0; j < list.size(); j++)
 			{
-				if (j == i || tmp[i] == null || tmp[j] == null) // Prevent removing all elements
+				if (j == i || list.get(i) == null || list.get(j) == null) // Prevent removing all elements
 				{
 					continue;
 				}
 
-				if (tmp[i].getX() >= tmp[j].getX())
+				if (list.get(i).getX() >= list.get(j).getX())
 				{
 					test1 = true;
 				}
-			
-				if (tmp[i].getX() <= tmp[j].getX())
+		
+				if (list.get(i).getX() <= list.get(j).getX())
 				{
 					test2 = true;
 				}
-			
-				if (tmp[i].getY() >= tmp[j].getY())
+		
+				if (list.get(i).getY() >= list.get(j).getY())
 				{
 					test3 = true;
 				}
-			
-				if (tmp[i].getY() <= tmp[j].getY())
+		
+				if (list.get(i).getY() <= list.get(j).getY())
 				{
 					test4 = true;
 				}
@@ -96,7 +100,6 @@ public class Geometry
 
 			if (test1 && test2 && test3 && test4)
 			{
-				tmp[i] = null;
 				list.set(i, null);
 			}
 		}
@@ -140,6 +143,6 @@ public class Geometry
 			}
 		}
 
-		return (maxX - minX)*(maxY-minY);
+		return (maxX - minX) * (maxY - minY);
 	}
 }
