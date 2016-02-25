@@ -11,7 +11,8 @@ public class Coordinate implements Comparable<Coordinate>
 	private int zMinutes;
 	private int zSeconds;
 
-	public Coordinate(Meridional ns, Zonal ew, int mdeg, int mmin, int msec, int zdeg, int zmin, int zsec)
+	public Coordinate(Meridional ns, Zonal ew, int mdeg, int mmin, int msec, int zdeg,
+		int zmin, int zsec)
 	{
 		northSouth = ns;
 		eastWest =  ew;
@@ -54,9 +55,9 @@ public class Coordinate implements Comparable<Coordinate>
 		int diff = howMuchWest() - arg0.howMuchWest();
 
 		if (diff == 0)
-			return howMuchSouth() - arg0.howMuchSouth();
-		else
-			return diff;
+			diff = howMuchSouth() - arg0.howMuchSouth();
+
+		return diff;
 	}
 	
 	public boolean equals(Object obj)

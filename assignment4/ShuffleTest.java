@@ -19,7 +19,8 @@ public class ShuffleTest
 			System.out.println("How many elements should the test have? (default is 15)");
 			String str = kbd.nextLine();
 			Scanner scan = new Scanner(str);
-			if(scan.hasNextInt()) {
+			if (scan.hasNextInt())
+			{
 				count = scan.nextInt();
 			} 
 			scan.close();
@@ -32,7 +33,7 @@ public class ShuffleTest
 			}
 			
 			int[][] counters = new int[count][count];
-			for (int i = 0; i < 100; i++)// i < 100
+			for (int i = 0; i < 100; i++)
 			{
 				Collections.shuffle(list);
 				//System.out.println(list);
@@ -75,6 +76,7 @@ public class ShuffleTest
 			sDev = Math.sqrt(total_submation / divident);
 			
 			System.out.println("SDev: " + sDev);
+			output.println("Standard Deviation = " + sDev);
 		}
 		catch (IOException e)
 		{

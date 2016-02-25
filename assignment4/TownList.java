@@ -29,7 +29,7 @@ public class TownList implements List<Town>
 		}
 		catch (Exception exc)
 		{
-			throw(exc);
+			System.out.println(exc);
 		}
 		
 		return returnVal;		
@@ -58,7 +58,6 @@ public class TownList implements List<Town>
 		catch (Exception e)
 		{
 			System.out.println(e);
-			throw(e);
 		}
 	}
 	
@@ -67,29 +66,66 @@ public class TownList implements List<Town>
 		int total = list.size();
 
 		if (c != null)
+		{
 			for (Town t : c)
-				list.add(t);
+			{
+				try
+				{
+					if (!list.contains(t))
+					{
+						list.add(t);
+					}
+				}
+				catch (Exception e)
+				{
+					System.out.println(e);
+				}
+			}
+		}
 
 		if (total > list.size())
 			return true;
 		
 		return false;
 	}
+	
 	public boolean addAll(int index, Collection<? extends Town> c)
 	{
 		int total = list.size();
 		boolean hasIncreased = false;
 		
-		for (Town t : c)
+		if (c != null)
 		{
-			if (t != null)
+			for (Town t : c)
 			{
-				list.add(index, t);
-				if (total == list.size() - 1)
+				try
 				{
-					index++;
-					total++;
-					hasIncreased = true;
+					if (!list.contains(t))
+					{
+						if (index > -1 && index < list.size())
+						{
+							list.add(index, t);
+						}
+						else if (index < 0)
+						{
+							list.add(0, t);
+						}
+						else if (index > list.size())
+						{
+							list.add(list.size(), t);
+						}
+
+						if (total == list.size() - 1)
+						{
+							index++;
+							total++;
+							hasIncreased = true;
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					System.out.println(e);
 				}
 			}
 		}
@@ -251,7 +287,8 @@ public class TownList implements List<Town>
 			}
 		}
 
-		sb.setLength(sb.length() - 2);
+		if (sb.length() > 1)
+			sb.setLength(sb.length() - 2); // Strip extra "; " from string
 		sb.append("]");
 	
 		return sb.toString();

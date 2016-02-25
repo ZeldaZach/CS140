@@ -25,6 +25,7 @@ public class TownListTester
 		
 		ArrayList<Town> alist = new ArrayList<>(Arrays.asList(town6, town7, town8));
 		ArrayList<Town> alist2 = new ArrayList<>(Arrays.asList(town9, town10, town11));
+		ArrayList<Town> alist3 = new ArrayList<>(Arrays.asList(town9, town12));
 	
 		System.out.println(list.add(town1));
 		System.out.println(list.add(town2));
@@ -37,6 +38,7 @@ public class TownListTester
 		
 		list.add(2, town4);
 		list.add(8, town5); // Index out of bounds value (So add to end of list instead)
+		list.add(2, null); // Null value
 		list.add(3, town5); // Repeat value
 		
 		System.out.println("Expected: [Lima, Peru; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India]");
@@ -48,8 +50,14 @@ public class TownListTester
 		System.out.println("Expected: [Lima, Peru; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India; Beijing, China; Valencia, Spain; Christchurch, New Zealand]");
 		System.out.println("List using addAll(ArrayList): " + list + "\n");
 
+		list.addAll(4, null);
+		
 		list.addAll(1, alist2);
 		System.out.println("Expected: [Lima, Peru; New York City, NY, USA; New Orleans, LI, USA; Jackson, MS, USA; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India; Beijing, China; Valencia, Spain; Christchurch, New Zealand]");
-		System.out.println("List using addAll(index, ArrayList): " + list + "\n");
+		System.out.println("List using addAll(index, ArrayList2): " + list + "\n");
+		
+		list.addAll(2, alist3);
+		System.out.println("Expected: [Lima, Peru; New York City, NY, USA; St. Louis, MI; New Orleans, LI, USA; Jackson, MS, USA; Williamsport, PA, USA; Valencia, Spain; London, UK; Mumbai, India; Beijing, China; Valencia, Spain; Christchurch, New Zealand]");
+		System.out.println("List using addAll(index, ArrayList3): " + list + "\n");
 	}
 }
