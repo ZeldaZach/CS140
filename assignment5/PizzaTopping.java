@@ -6,14 +6,18 @@ public abstract class PizzaTopping implements Pizza
 	
 	public String getDescription()
 	{
+		String retStr = getClass().getSimpleName();
+		
 		if (on instanceof PizzaTopping)
 		{
-			return ", " + on.getDescription();
+			retStr += ", " + on.getDescription();
 		}
 		else
 		{
-			return " on " + on.getDescription();
+			retStr += " on " + on.getDescription();
 		}
+		
+		return retStr;
 	}
 	
 	public void setOn(Pizza p)
@@ -35,9 +39,9 @@ public abstract class PizzaTopping implements Pizza
 	{
 		int retVal = 0;
 		
-		if (on instanceof PizzaTopping)
+		if (p instanceof PizzaTopping)
 		{
-			retVal = this.getClass().getSimpleName().compareTo(p.getClass().getSimpleName());
+			retVal = getClass().getSimpleName().compareTo(p.getClass().getSimpleName());
 		}
 		else
 		{
