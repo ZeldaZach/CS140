@@ -7,8 +7,8 @@ import java.util.Set;
 
 public class MultichoiceQuestion extends Question
 {
-	ArrayList<String> choices;
-	ArrayList<Integer> correctChoices;
+	ArrayList<String> choices = new ArrayList<>();
+	ArrayList<Integer> correctChoices = new ArrayList<>();
 
 	public MultichoiceQuestion(String questionText)
 	{
@@ -17,7 +17,9 @@ public class MultichoiceQuestion extends Question
 
 	public void addChoice(String choice, boolean correct)
 	{
-		choices.add(choice);
+		if (choice != null)
+			choices.add(choice);
+		
 		if (correct)
 		{
 			correctChoices.add(choices.size());
