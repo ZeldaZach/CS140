@@ -1,7 +1,5 @@
 package assignment05;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Set;
 
 /**
  * A question with multiple choices.

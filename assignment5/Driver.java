@@ -33,7 +33,7 @@ public class Driver
 		order = new Mushroom(order); // Mush2
 		System.out.println(order.getDescription() + " " + order.getCost());
 		
-		order = sortToppings(order);
+		order = sortToppings(order); // Sort the toppings alphabetically
 		System.out.println(order.getDescription() + " " + order.getCost());
 	}
 

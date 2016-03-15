@@ -2,9 +2,6 @@ package assignment05;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import org.junit.Test;
 
 public class PizzaTester
@@ -17,7 +14,7 @@ public class PizzaTester
 		pie = new ExtraCheese(pie);
 		pie = new Pepperoni(pie);
 		
-		assertEquals(14.0, pie.getCost(), 0.001);
+		assertEquals(14.0, pie.getCost(), 1E-6);
 	}
 	
 	@Test
@@ -29,6 +26,6 @@ public class PizzaTester
 		pie = new Mushroom(pie);
 		pie = new Pepperoni(pie);
 		
-		assertEquals(10.25, pie.getCost(), 0.001);
+		assertEquals(10.25, pie.getCost(), 1E-6);
 	}
 }

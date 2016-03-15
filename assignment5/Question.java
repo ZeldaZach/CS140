@@ -63,6 +63,7 @@ public class Question {
 		// important: accept the warning otherwise the 
 		// program will break because in.close() 
 		// will close all keyboard input to the program
+		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		String response = in.nextLine();
 		System.out.println(checkAnswer(response));
