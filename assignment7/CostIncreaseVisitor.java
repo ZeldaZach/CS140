@@ -14,7 +14,7 @@ public class CostIncreaseVisitor implements Visitor
 	
 	/**
 	 * Constructor that will set the increase value of the Visitor
-	 * @param i -- how much to increase by (a percentage)
+	 * @param i how much to increase by (a percentage)
 	 */
 	public CostIncreaseVisitor(double i)
 	{
@@ -23,7 +23,7 @@ public class CostIncreaseVisitor implements Visitor
 
 	/**
 	 * Override the visit interface class for Products, does nothing
-	 * @param p -- Must be of type of Product
+	 * @param p Must be of type of Product
 	 */
 	@Override
 	public void visit(Product p)
@@ -33,7 +33,7 @@ public class CostIncreaseVisitor implements Visitor
 
 	/**
 	 * Override the visit interface class for Subassemblys, does nothing
-	 * @param p -- Must be of type of Subassembly
+	 * @param p Must be of type of Subassembly
 	 */
 	@Override
 	public void visit(Subassembly p)
@@ -44,7 +44,7 @@ public class CostIncreaseVisitor implements Visitor
 	/**
 	 * Override the visit interface class for Pieces, sets the cost of the piece to the new cost
 	 * (New cost = old cost + old cost * increase)
-	 * @param p -- Must be of type Piece
+	 * @param p Must be of type Piece
 	 */
 	@Override
 	public void visit(Piece p)

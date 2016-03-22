@@ -19,9 +19,9 @@ public class Piece extends Product
 
 	/**
 	 * Creates a Piece object with a name, cost, and how long it takes to manufacture
-	 * @param description -- Description of the Piece
-	 * @param cst -- How much the piece costs to manufacture
-	 * @param mTime -- How much time it takes to manufacture the piece
+	 * @param description Description of the Piece
+	 * @param cst How much the piece costs to manufacture
+	 * @param mTime How much time it takes to manufacture the piece
 	 */
 	public Piece(String description, double cst, double mTime)
 	{
@@ -32,7 +32,7 @@ public class Piece extends Product
 
 	/**
 	 * Get the cost of the Piece Product
-	 * @return cost
+	 * @return cost (A double which is the cost of the Piece)
 	 */
 	@Override
 	public double getCost()
@@ -42,7 +42,7 @@ public class Piece extends Product
 
 	/**
 	 * Get how long it takes to manufacture the Piece Product
-	 * @return manufactureTime
+	 * @return manufactureTime (A double which is the manufacture time of the Piece)
 	 */
 	@Override
 	public double getManufactureTime()
@@ -52,7 +52,7 @@ public class Piece extends Product
 
 	/**
 	 * Set the cost of the Piece Product
-	 * @param cost -- How much you want the piece to cost
+	 * @param cost How much you want the piece to cost
 	 */
 	@Override
 	public void setCost(double cost)
@@ -62,7 +62,7 @@ public class Piece extends Product
 
 	/**
 	 * Set the manufacturing time of the Piece Product
-	 * @param time -- How much time you want the manufacture time to be for the piece
+	 * @param time How much time you want the manufacture time to be for the piece
 	 */
 	@Override
 	public void setManufactureTime(double time)
@@ -72,8 +72,8 @@ public class Piece extends Product
 
 	/**
 	 * Sets the indent value of the printed list to indent
-	 * @param indent -- used to set the indent value in the super class
-	 * @param list -- not used in this function
+	 * @param indent used to set the indent value in the super class
+	 * @param list not used in this function
 	 */
 	@Override
 	public void addAllParts(int indent, List<Product> list)
@@ -83,7 +83,7 @@ public class Piece extends Product
 	
 	/**
 	 * Calls Visitor sub-class visit(Piece) which will either update the cost or manufacture time
-	 * @param v -- a Visitor or sub-class of Visitor which will determine the action to take
+	 * @param v a Visitor or sub-class of Visitor which will determine the action to take
 	 */
 	@Override
 	public void accept(Visitor v)

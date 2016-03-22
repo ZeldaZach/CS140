@@ -22,7 +22,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Create a Product with a description
-	 * @param d -- the description you want to give the Product
+	 * @param d the description you want to give the Product
 	 */
 	public Product(String d)
 	{
@@ -31,33 +31,33 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Abstract method that will be implemented by sub classes to get the cost of the Product
-	 * @return cost
+	 * @return cost (A double which repesents the cost of the Product)
 	 */
 	public abstract double getCost();
 	
 	/**
 	 * Abstract method that will be implemented by sub classes to get the manufactureTime of the Product
-	 * @return manufactureTime
+	 * @return manufactureTime (A double which represents the manufacturing time of the Product)
 	 */
 	public abstract double getManufactureTime();
 	
 	/**
 	 * Abstract method that will be implemented by sub classes to create the pretty print list of the Product
-	 * @param indent -- How far you want to indent the object
-	 * @param list -- The list of the products
+	 * @param indent How far you want to indent the object
+	 * @param list The list of the products
 	 */
 	public abstract void addAllParts(int indent, List<Product> list);
 	
 	/**
-	 * 
-	 * @param v
+	 * An abstract method that must be implemented by subclasses
+	 * @param v A Visitor or sub class of Visitor
 	 */
 	public abstract void accept(Visitor v);
 
 	/**
 	 * A method that has to be overridden to allow us to set the cost of the sub Product
-	 * @throws UnsupportedOperationException -- This method needs to be overridden in sub classes
-	 * @param cost -- To be used in sub class implementations, not this one
+	 * @throws UnsupportedOperationException This method needs to be overridden in sub classes
+	 * @param cost To be used in sub class implementations, not this one
 	 */
 	public void setCost(double cost)
 	{
@@ -66,8 +66,8 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * A method that has to be overridden to allow us to set the manufacture time of the sub Product
-	 * @throws UnsupportedOperationException -- This method needs to be overridden in the sub classes
-	 * @param time
+	 * @throws UnsupportedOperationException This method needs to be overridden in the sub classes
+	 * @param time What you want the new manufacture time to be, unused in this method
 	 */
 	public void setManufactureTime(double time)
 	{
@@ -76,7 +76,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Get the indent value of the Product
-	 * @return indent
+	 * @return indent (An integer representing the indent value of the PRoduct)
 	 */
 	public int getIndent()
 	{
@@ -85,7 +85,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Set the indent value of the Product
-	 * @param i -- the indent value you want to set it to
+	 * @param i the indent value you want to set it to
 	 */
 	public void setIndent(int i)
 	{
@@ -94,7 +94,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Implementing Iterator interface to add the object to the list, add the indentations, and return
-	 * @return list -- the list after it has been iterated on
+	 * @return list (the list after it has been iterated on)
 	 */
 	public Iterator<Product> iterator()
 	{
@@ -107,7 +107,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Overriding the Object toString class to allow us to print out a pretty list
-	 * @return sb -- Proper amount of dashes for indents followed by the object name
+	 * @return sb (Proper amount of dashes for indents followed by the object name)
 	 */
 	@Override
 	public String toString()
@@ -124,8 +124,8 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Implementing the comparator interface, putting Pieces before Subassemblys
-	 * @param other -- A product or sub-class of it that we are comparing to re-arrange the list
-	 * @return integer -- an integer that tells us the placement of the object in the list
+	 * @param other A product or sub-class of it that we are comparing to re-arrange the list
+	 * @return integer (an integer that tells us the placement of the object in the list)
 	 */
 	public int compareTo(Product other)
 	{

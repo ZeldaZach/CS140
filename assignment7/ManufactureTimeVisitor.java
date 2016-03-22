@@ -14,7 +14,7 @@ public class ManufactureTimeVisitor implements Visitor
 
 	/**
 	 * Constructor that will set the increase value of the Visitor
-	 * @param i -- how much to increase by (a percentage)
+	 * @param i how much to increase by (a percentage)
 	 */
 	public ManufactureTimeVisitor(double i)
 	{
@@ -23,7 +23,7 @@ public class ManufactureTimeVisitor implements Visitor
 	
 	/**
 	 * Override the visit interface class for Products, does nothing
-	 * @param p -- Must be of type of Product
+	 * @param p Must be of type of Product
 	 */
 	@Override
 	public void visit(Product p)
@@ -33,7 +33,7 @@ public class ManufactureTimeVisitor implements Visitor
 
 	/**
 	 * Override the visit interface class for Subassemblys, does nothing
-	 * @param p -- Must be of type of Subassembly
+	 * @param p Must be of type of Subassembly
 	 */
 	@Override
 	public void visit(Subassembly p)
@@ -44,7 +44,7 @@ public class ManufactureTimeVisitor implements Visitor
 	/**
 	 * Override the visit interface class for Pieces, sets the manufacture time 
 	 * of the piece to the new time (New time = old time + old time * increase)
-	 * @param p -- Must be of type Piece
+	 * @param p Must be of type Piece
 	 */
 	@Override
 	public void visit(Piece p)

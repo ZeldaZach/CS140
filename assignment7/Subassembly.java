@@ -20,7 +20,7 @@ public class Subassembly extends Product
 
 	/** 
 	 * Constructor that creates a Product with description d
-	 * @param d -- the description to give
+	 * @param d the description to give
 	 */
 	public Subassembly(String d)
 	{
@@ -29,7 +29,7 @@ public class Subassembly extends Product
 
 	/**
 	 * Override the Product getCost(); Will get the cost of all the products
-	 * @return total -- The cost of all the pieces added together
+	 * @return total (The cost of all the pieces added together)
 	 */
 	@Override
 	public double getCost()
@@ -44,7 +44,7 @@ public class Subassembly extends Product
 
 	/** 
 	 * Override the Product getManufactureTime(); Will get the max time of all the products
-	 * @return max -- The maximum time it takes to manufacture any of the objects in the ArrayList
+	 * @return max (The maximum time it takes to manufacture any of the objects in the ArrayList)
 	 */
 	@Override
 	public double getManufactureTime()
@@ -62,7 +62,7 @@ public class Subassembly extends Product
 
 	/**
 	 * Add a Product or Subclass of Product to the parts ArrayList
-	 * @param p -- The product to add to the list
+	 * @param p The product to add to the list
 	 */
 	public void add(Product p)
 	{
@@ -72,8 +72,8 @@ public class Subassembly extends Product
 	/**
 	 * Sets the indent value to indent, then calls the addAllParts from
 	 * the typeof p class in a recursive way
-	 * @param indent -- Indent value
-	 * @param list -- Recursion list of the Products already added
+	 * @param indent Indent value
+	 * @param list Recursion list of the Products already added
 	 */
 	@Override
 	public void addAllParts(int indent, List<Product> list)
@@ -89,7 +89,7 @@ public class Subassembly extends Product
 
 	/**
 	 * This method will do nothing, but is included as it's necessary to compile
-	 * @param v -- a Visitor or sub-class of Visitor which will determine the action to take, only if this is a Piece
+	 * @param v a Visitor or sub-class of Visitor which will determine the action to take, only if this is a Piece
 	 */
 	@Override
 	public void accept(Visitor v)

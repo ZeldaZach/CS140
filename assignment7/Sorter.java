@@ -12,8 +12,16 @@ package assignment07;
 public class Sorter implements Visitor
 {
 	/**
+	 * Constructor that does nothing as you should be calling Visitor.visit
+	 */
+	public Sorter()
+	{
+		// Do Nothing
+	}
+
+	/**
 	 * Sets up the visit method for param Product, Will do nothing
-	 * @param p -- Must be of type Product
+	 * @param p Must be of type Product
 	 */
 	@Override
 	public void visit(Product p)
@@ -23,7 +31,7 @@ public class Sorter implements Visitor
 
 	/**
 	 * Sets up the visit method for param Piece, Will do nothing
-	 * @param p -- Must be of type Piece
+	 * @param p Must be of type Piece
 	 */
 	@Override
 	public void visit(Piece p)
@@ -33,7 +41,7 @@ public class Sorter implements Visitor
 
 	/**
 	 * Sets up the visit method for param Subassembly, will sort using compareTo
-	 * @param p -- Must be of type Subassembly
+	 * @param p Must be of type Subassembly
 	 */
 	@Override
 	public void visit(Subassembly p)
