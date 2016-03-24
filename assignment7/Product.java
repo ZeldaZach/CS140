@@ -93,7 +93,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 	}
 
 	/**
-	 * Implementing Iterator interface to add the object to the list, add the indentations, and return
+	 * Implementing Iterator interface to iterate elements in a structure
 	 * @return list (the list after it has been iterated on)
 	 */
 	public Iterator<Product> iterator()
@@ -107,7 +107,7 @@ public abstract class Product implements Iterable<Product>, Comparable<Product>
 
 	/**
 	 * Overriding the Object toString class to allow us to print out a pretty list
-	 * @return sb (Proper amount of dashes for indents followed by the object name)
+	 * @return String (Lists proper amount of dashes (depth in the tree) for indents followed by the object name in the tree)
 	 */
 	@Override
 	public String toString()
