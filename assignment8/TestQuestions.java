@@ -51,6 +51,12 @@ public class TestQuestions
 	{
 		assertEquals(Math.sqrt(2), Question3.squareRoot(2), 1E-6);
 	}
+	
+	@Test (expected=IllegalArgumentException.class) 
+	public void testNegativeInput()
+	{
+		Question3.squareRoot(-1);
+	}
 
 	@Test
 	public void testQ4_triangle()
