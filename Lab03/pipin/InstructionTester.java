@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 //import org.junit.contrib.java.lang.system.ExpectedSystemExit;
 
@@ -137,9 +138,28 @@ public class InstructionTester {
 	}
 
 	@Test 
-	// this test checks whether the jump is done correctly, when
+	// this test checks whether the relative jump is done correctly, when
 	// address is the argument
-	public void testJMPI() {
+	public void testJMP0() {
+		// first increment PC to 10
+		Instruction instr = machine.get(0x0);
+		for(int i = 0; i < 10; i++) instr.execute(0, 0);
+		instr = machine.get(0x3);
+		int arg = 160;  
+		machine.setAccum(100);
+		instr.execute(arg, 0); 
+		// should have set the program counter to 40
+		assertArrayEquals(dataCopy, machine.getData()); 
+		assertEquals("Program counter was changed", 170,
+				machine.getPC());
+		assertEquals("Accumulator was not changed", 100,
+				machine.getAccum());
+	}
+
+	@Test 
+	// this test checks whether the absolute jump is done correctly, when
+	// address is the argument
+	public void testJMP2() {
 		Instruction instr = machine.get(0x3);
 		int arg = 260;  
 		machine.setAccum(200);
@@ -152,11 +172,29 @@ public class InstructionTester {
 				machine.getAccum());
 	}
 
+	@Test 
+	// this test checks whether the relative jump is done correctly, when
+	// address is in memory
+	public void testJMP4() {
+		// first increment PC to 20
+		Instruction instr = machine.get(0x0);
+		for(int i = 0; i < 20; i++) instr.execute(0, 0);
+		instr = machine.get(0x3);
+		int arg = 260; // the machine value is data[260] = -2560+2600 = 40 
+		machine.setAccum(200);
+		instr.execute(arg, 4); 
+		// should have set the program counter to 40
+		assertArrayEquals(dataCopy, machine.getData()); 
+		assertEquals("Program counter was changed", 60,
+				machine.getPC());
+		assertEquals("Accumulator was not changed", 200,
+				machine.getAccum());
+	}
 
 	@Test 
-	// this test checks whether the jump is done correctly, when
+	// this test checks whether the absolute jump is done correctly, when
 	// address is in memory
-	public void testJUMP() {
+	public void testJMP6() {
 		Instruction instr = machine.get(0x3);
 		int arg = 260; // the machine value is data[260] = -2560+2600 = 40 
 		machine.setAccum(200);
@@ -170,9 +208,28 @@ public class InstructionTester {
 	}
 
 	@Test 
-	// this test checks whether the jump is done correctly, when
+	// this test checks whether the relative jump is done correctly, when
 	// address is the argument
-	public void testJMZI() {
+	public void testJMPZ0() {
+		// first increment PC to 10
+		Instruction instr = machine.get(0x0);
+		for(int i = 0; i < 10; i++) instr.execute(0, 0);
+		instr = machine.get(0x4);
+		int arg = 260;  
+		machine.setAccum(0);
+		instr.execute(arg, 0); 
+		// should have set the program counter to 40
+		assertArrayEquals(dataCopy, machine.getData()); 
+		assertEquals("Program counter was changed", 270,
+				machine.getPC());
+		assertEquals("Accumulator was not changed", 0,
+				machine.getAccum());
+	}
+
+	@Test 
+	// this test checks whether the absolute jump is done correctly, when
+	// address is the argument
+	public void testJMPZ2() {
 		Instruction instr = machine.get(0x4);
 		int arg = 260;  
 		machine.setAccum(0);
@@ -186,9 +243,28 @@ public class InstructionTester {
 	}
 
 	@Test 
-	// this test checks whether the jump is done correctly, when
+	// this test checks whether the relative jump is done correctly, when
 	// address is in memory
-	public void testJMPZ() {
+	public void testJMPZ4() {
+		// first increment PC to 20
+		Instruction instr = machine.get(0x0);
+		for(int i = 0; i < 20; i++) instr.execute(0, 0);
+		instr = machine.get(0x4);
+		int arg = 260; // the machine value is data[260] = -2560+2600 = 40 
+		machine.setAccum(0);
+		instr.execute(arg, 4); 
+		// should have set the program counter to 40
+		assertArrayEquals(dataCopy, machine.getData()); 
+		assertEquals("Program counter was changed", 60,
+				machine.getPC());
+		assertEquals("Accumulator was not changed", 0,
+				machine.getAccum());
+	}
+
+	@Test 
+	// this test checks whether the absolute jump is done correctly, when
+	// address is in memory
+	public void testJMPZ6() {
 		Instruction instr = machine.get(0x4);
 		int arg = 260; // the machine value is data[260] = -2560+2600 = 40 
 		machine.setAccum(0);
@@ -204,7 +280,23 @@ public class InstructionTester {
 	@Test 
 	// this test checks whether no jump is done if accumulator is zero, 
 	// address is the argument
-	public void testJMZIaccumNonZero() {
+	public void testJMZ0accumNonZero() {
+		Instruction instr = machine.get(0x4);
+		int arg = 260;  
+		machine.setAccum(200);
+		instr.execute(arg, 0); 
+		// should have set the program counter incremented
+		assertArrayEquals(dataCopy, machine.getData()); 
+		assertEquals("Program counter was incremented", ipInit+1,
+				machine.getPC());
+		assertEquals("Accumulator was not changed", 200,
+				machine.getAccum());
+	}
+
+	@Test 
+	// this test checks whether no jump is done if accumulator is zero, 
+	// address is the argument
+	public void testJMZ2accumNonZero() {
 		Instruction instr = machine.get(0x4);
 		int arg = 260;  
 		machine.setAccum(200);
@@ -220,7 +312,23 @@ public class InstructionTester {
 	@Test 
 	// this test checks whether no jump is done if accumulator is zero, 
 	// address is in memory
-	public void testJMPZdirectAccumNonZero() {
+	public void testJMPZ4directAccumNonZero() {
+		Instruction instr = machine.get(0x4);
+		int arg = 260; // the machine value is data[260] = -2560+2600 = 40 
+		machine.setAccum(200);
+		instr.execute(arg, 4); 
+		// should have set the program counter incremented
+		assertArrayEquals(dataCopy, machine.getData()); 
+		assertEquals("Program counter was incremented", ipInit+1,
+				machine.getPC());
+		assertEquals("Accumulator was not changed", 200,
+				machine.getAccum());
+	}
+
+	@Test 
+	// this test checks whether no jump is done if accumulator is zero, 
+	// address is in memory
+	public void testJMPZ6directAccumNonZero() {
 		Instruction instr = machine.get(0x4);
 		int arg = 260; // the machine value is data[260] = -2560+2600 = 40 
 		machine.setAccum(200);
@@ -909,4 +1017,3 @@ public class InstructionTester {
 
 	// HALT is missing at this point
 }
-
