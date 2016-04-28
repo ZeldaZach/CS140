@@ -48,6 +48,14 @@ public class Code
 		return (int)(code[i]);
 	}
 	
+	public String getText(int i)
+	{
+		if (0 <= i && i < nextCodeIndex)
+			return InstructionMap.mnemonics.get(getOpPart(i)) + " " + getArg(i);
+		
+		return "";
+	}
+	
 	public void clear()
 	{
 		for (int i = 0; i < CODE_MAX; i++)

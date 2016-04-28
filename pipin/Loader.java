@@ -89,7 +89,7 @@ public class Loader
 		}
 		catch (ArrayIndexOutOfBoundsException e)
 		{
-			return("Code array Index " + e.getMessage());
+			return("Data array Index " + e.getMessage());
 		}
 		catch (NoSuchElementException e)
 		{

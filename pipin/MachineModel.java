@@ -1,6 +1,8 @@
 package pippin;
 
-public class MachineModel
+import java.util.Observable;
+
+public class MachineModel extends Observable
 {
 	public final Instruction[] INSTRUCTIONS = new Instruction[0x10];
 	private CPU cpu = new CPU();
@@ -47,9 +49,14 @@ public class MachineModel
 		return memory.getData();
 	}
 	
-	int getData(int i)
+	public int getData(int i)
 	{
 		return memory.getData(i);
+	}
+	
+	public Code getCode()
+	{
+		return code;
 	}
 
 	public int getPC()
@@ -73,6 +80,11 @@ public class MachineModel
 		code.clear();
 		cpu.accum = 0;
 		cpu.pc = 0;
+	}
+	
+	public int getChangedIndex()
+	{
+		return memory.getChangedIndex();
 	}
 
 	public MachineModel()
