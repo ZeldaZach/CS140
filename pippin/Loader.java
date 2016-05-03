@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Loader
 {
-
 	public static void main(String[] args)
 	{
 		System.out.println("Enter the name of the file without extension: ");
@@ -35,7 +34,6 @@ public class Loader
 			}
 		}
 	}
-
 
 	public static String load(MachineModel model, File program, File data)
 	{
@@ -90,6 +88,42 @@ public class Loader
 		catch (ArrayIndexOutOfBoundsException e)
 		{
 			return("Data array Index " + e.getMessage());
+		}
+		catch (NoSuchElementException e)
+		{
+			return("NoSuchElementException");
+		}
+		catch (FileNotFoundException e1) 
+		{
+			return("File " + program.getName() + " Not Found");
+		}
+	}
+	
+	public static String load(MachineModel model, File program)
+	{
+		if (model == null || program == null)
+			return null;
+
+		try (Scanner input = new Scanner(program))
+		{
+			while (input.hasNextLine())
+			{
+				String line = input.nextLine();
+				Scanner parser = new Scanner(line);
+
+				int op = parser.nextInt(16);
+				int arg = parser.nextInt(16);
+
+				model.setCode(op, arg);
+
+				parser.close();
+			}
+			
+			return "success";
+		}
+		catch (ArrayIndexOutOfBoundsException e)
+		{
+			return("Code array Index " + e.getMessage());
 		}
 		catch (NoSuchElementException e)
 		{

@@ -8,6 +8,7 @@ import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 public class ControlPanel implements Observer
 {
@@ -28,17 +29,22 @@ public class ControlPanel implements Observer
 		JPanel returnPanel = new JPanel();
 		returnPanel.setLayout(new GridLayout(1,0));
 		stepButton.setBackground(Color.WHITE);
-//		stepButton.addActionListener(e -> machineView.step());
+		stepButton.addActionListener(e -> machineView.step());
 		returnPanel.add(stepButton);
 		clearButton.setBackground(Color.WHITE);
 		clearButton.addActionListener(e -> machineView.clearAll());
 		returnPanel.add(clearButton);
 		runButton.setBackground(Color.WHITE);
-//		runButton.addActionListener(e -> machineView.toggleAutoStep());
+		runButton.addActionListener(e -> machineView.toggleAutoStep());
 		returnPanel.add(runButton);
 		reloadButton.setBackground(Color.WHITE);
-//		reloadButton.addActionListener(e -> machineView.reload());
+		reloadButton.addActionListener(e -> machineView.reload());
 		returnPanel.add(reloadButton);
+		
+		JSlider slider = new JSlider(5,1000);
+		slider.addChangeListener(e -> machineView.setPeriod(slider.getValue()));
+		returnPanel.add(slider);
+		
 		return returnPanel;
 	}
 

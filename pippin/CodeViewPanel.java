@@ -66,7 +66,8 @@ public class CodeViewPanel implements Observer
 	{
 		if (arg1 != null && arg1.equals("Load Code"))
 		{
-			for(int i = 0; i < Code.CODE_MAX; i++)
+			code = machineView.getCode();
+			for (int i = 0; i < Code.CODE_MAX; i++)
 			{
 				codeText[i].setText(code.getText(i));
 			}	

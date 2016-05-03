@@ -32,18 +32,18 @@ public class MenuBarBuilder implements Observer
 		assemble.setMnemonic(KeyEvent.VK_A);
 		assemble.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_A, ActionEvent.CTRL_MASK));
-		//		assemble.addActionListener(e -> machineView.assembleFile());
+		assemble.addActionListener(e -> machineView.assembleFile());
 		returnMenu.add(assemble);
 		load.setMnemonic(KeyEvent.VK_L);
 		load.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		//		load.addActionListener(e -> machineView.loadFile());
+		load.addActionListener(e -> machineView.loadCode());
 		returnMenu.add(load);
 
 		data.setMnemonic(KeyEvent.VK_L);
 		data.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_L, ActionEvent.CTRL_MASK));
-		//		data.addActionListener(e -> machineView.loadData());
+		data.addActionListener(e -> machineView.loadData());
 		returnMenu.add(data);
 
 
@@ -51,7 +51,7 @@ public class MenuBarBuilder implements Observer
 		exit.setMnemonic(KeyEvent.VK_E);
 		exit.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_E, ActionEvent.CTRL_MASK));
-		//		exit.addActionListener(e -> machineView.exit());
+		exit.addActionListener(e -> machineView.exit());
 		returnMenu.add(exit);
 
 		return returnMenu;
@@ -64,7 +64,7 @@ public class MenuBarBuilder implements Observer
 		go.setMnemonic(KeyEvent.VK_G);
 		go.setAccelerator(KeyStroke.getKeyStroke(
 				KeyEvent.VK_G, ActionEvent.CTRL_MASK));
-		//		go.addActionListener(e -> machineView.execute());
+		go.addActionListener(e -> machineView.execute());
 		menu.add(go);
 		return menu;
 	}
