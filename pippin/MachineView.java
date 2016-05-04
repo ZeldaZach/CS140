@@ -651,7 +651,6 @@ public class MachineView extends Observable
 				System.out.println("Error writing properties file");
 			}	
 
-			noDataNeeded = false; // Added
 			finalLoad_ReloadStep();
 		} 
 	}		
