@@ -18,17 +18,17 @@ public class MachineModel extends Observable
 		else
 			running = false;
 	}
-	
+
 	public void setCode(int op, int arg)
 	{
 		code.setCode(op,  arg);
 	}
-	
+
 	public void setAccum(int i)
 	{
 		cpu.accum = i;
 	}
-	
+
 	public void setRunning(boolean r)
 	{
 		running = r;
@@ -48,12 +48,12 @@ public class MachineModel extends Observable
 	{
 		return memory.getData();
 	}
-	
+
 	public int getData(int i)
 	{
 		return memory.getData(i);
 	}
-	
+
 	public Code getCode()
 	{
 		return code;
@@ -68,7 +68,7 @@ public class MachineModel extends Observable
 	{
 		return cpu.accum;
 	}
-	
+
 	public boolean isRunning()
 	{
 		return running;
@@ -81,7 +81,7 @@ public class MachineModel extends Observable
 		cpu.accum = 0;
 		cpu.pc = 0;
 	}
-	
+
 	public int getChangedIndex()
 	{
 		return memory.getChangedIndex();
@@ -91,7 +91,7 @@ public class MachineModel extends Observable
 	{
 		this(false);
 	}
-	
+
 	public void step()
 	{
 		try
@@ -100,7 +100,7 @@ public class MachineModel extends Observable
 			int arg = code.getArg(cpu.pc);
 
 			Instruction.checkParity(opPart);
-			
+
 			INSTRUCTIONS[opPart/8].execute(arg, opPart%8);
 		}
 		catch (Exception e)
@@ -109,7 +109,7 @@ public class MachineModel extends Observable
 			throw e;
 		}
 	}
-	
+
 	public MachineModel(boolean gui)
 	{
 		withGUI = gui;
@@ -341,19 +341,19 @@ public class MachineModel extends Observable
 				throw new IllegalInstructionException(
 						"Illegal flags for this instruction: " + fString);
 			}
-			
+
 			if (cpu.accum == 0)
 				cpu.accum = 1;
 			else
 				cpu.accum = 0;
-			
+
 			cpu.pc++;	
 		};
-		
+
 		// INSTRUCTION FOR CMPL (compare less than 0)
 		INSTRUCTIONS[0xB] = (arg, flags) -> {
 			flags = flags & 0x6;
-			
+
 			if (flags != 0)
 			{
 				String fString = "(" + (flags%8 > 3?"1":"0") + 
@@ -361,19 +361,19 @@ public class MachineModel extends Observable
 				throw new IllegalInstructionException(
 						"Illegal flags for this instruction: " + fString);
 			}
-			
+
 			if (memory.getData(arg) < 0)
 				cpu.accum = 1;
 			else
 				cpu.accum = 0;
-			
+
 			cpu.pc++;
 		};
-		
+
 		// INSTRUCTION FOR CMPZ (compare to zero)
 		INSTRUCTIONS[0xC] = (arg, flags) -> {
 			flags = flags & 0x6;
-			
+
 			if (flags != 0)
 			{
 				String fString = "(" + (flags%8 > 3?"1":"0") + 
@@ -381,19 +381,19 @@ public class MachineModel extends Observable
 				throw new IllegalInstructionException(
 						"Illegal flags for this instruction: " + fString);
 			}
-			
+
 			if (memory.getData(arg) == 0)
 				cpu.accum = 1;
 			else
 				cpu.accum = 0;
-			
+
 			cpu.pc++;
 		};
-		
+
 		// INSTRUCTION FOR HALT (halt execution)
 		INSTRUCTIONS[0xF] = (arg, flags) -> {
 			flags = flags & 0x6;
-			
+
 			if (flags != 0)
 			{
 				String fString = "(" + (flags%8 > 3?"1":"0") + 
@@ -401,7 +401,7 @@ public class MachineModel extends Observable
 				throw new IllegalInstructionException(
 						"Illegal flags for this instruction: " + fString);
 			}
-			
+
 			halt();
 		};
 

@@ -19,7 +19,7 @@ public class Assembler
 		noArgument.add("NOT");
 	}
 
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 		StringBuilder error = new StringBuilder();
 		System.out.println("Enter the name of the file without extension: ");
@@ -30,7 +30,7 @@ public class Assembler
 					new File(filename + ".pexe"), error);
 			System.out.println(i + " " + error);
 		}
-	}
+	}*/
 	
 	/**
 	 * Method to assemble a file to its executable representation. 
@@ -80,12 +80,12 @@ public class Assembler
 				}
 				else if (blankLineFound && line.trim().length() != 0)
 				{
-					error.append("Illegal blank line in the source file");
+					error.append("Illegal blank line in the source file at line " + lineNum);
 					retVal = firstBlankLineNum;
 				}
-				else if (line.charAt(0) == ' ' || line.charAt(0) == '\t')
+				else if (!blankLineFound && (line.charAt(0) == ' ' || line.charAt(0) == '\t'))
 				{
-					error.append("Line starts with illegal white space");
+					error.append("Line " + (lineNum) + " starts with illegal white space");
 					retVal = lineNum;
 				}
 				else
@@ -114,16 +114,19 @@ public class Assembler
 				if (!InstructionMap.opcode.containsKey(parts[0].toUpperCase()))
 				{
 					error.append("Error on line " + (i+1) + ": illegal mnemonic");
+					retVal = i+1; // Added
 				}
 				else if (!parts[0].equals(parts[0].toUpperCase()))
 				{
 					error.append("Error on line " + (i+1) + ": mnemonic must be upper case");
+					retVal = i+1; // Added
 				}
 				else if (noArgument.contains(parts[0]))
 				{
 					if (parts.length > 1)
 					{
 						error.append("Error on line " + (i+1) + ": this mnemonic cannot take arguements");
+						retVal = i+1; // Added
 					}
 					else
 					{
@@ -137,10 +140,12 @@ public class Assembler
 					if (parts.length > 2)
 					{
 						error.append("Error on line " + (i+1) + ": this mnemonic has too many arguments");
+						retVal = i+1; // Added
 					}
 					else if (parts.length == 1)
 					{
 						error.append("Error on line " + (i+1) + ": this mnemonic is missing arguments");
+						retVal = i+1; // Added
 					}
 					else
 					{
@@ -174,6 +179,7 @@ public class Assembler
 						catch (NumberFormatException e)
 						{
 							error.append("Error on line " + (i+1) + ": argument is not a hex number");
+							retVal = i+1; // Added
 						}
 					}
 				}

@@ -351,7 +351,19 @@ public class MachineView extends Observable
 			{
 				model.step();
 			}
-			catch (CodeAccessException e)
+			catch (RuntimeException e)
+			{
+				halt();
+				JOptionPane.showMessageDialog(
+						frame,
+						"Illegal access to code from line " + getPC() + "\n" +
+						"Exception type: " + e.getClass().getSimpleName() + "\n" +
+						"Exception message: " + e.getMessage(),
+						"Run time error",
+						JOptionPane.OK_OPTION);
+			}
+			// Commented out as it's a bit excessive to tell the same thing every time?
+			/*catch (CodeAccessException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
@@ -366,7 +378,8 @@ public class MachineView extends Observable
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"Array Out of Bounds error?",
+						"Illegal access to code from line " + getPC() + "\n"
+								+ "Exception message: " + e.getClass().getSimpleName(),
 						"Run time error",
 						JOptionPane.OK_OPTION);
 			}
@@ -414,7 +427,7 @@ public class MachineView extends Observable
 						"PARITYCHECK EXCEPTION",
 						"Run time error",
 						JOptionPane.OK_OPTION);
-			}
+			}*/
 
 			setChanged();
 			notifyObservers();
@@ -518,6 +531,9 @@ public class MachineView extends Observable
 
 	public void loadCode()
 	{
+        programLoaded = false;
+        noDataNeeded = false;
+        
 		JFileChooser chooser = new JFileChooser(executableDir);
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Pippin Executable Files", "pexe");
 		chooser.setFileFilter(filter);
@@ -628,7 +644,7 @@ public class MachineView extends Observable
 
 	private void finalLoad_ReloadStep()
 	{
-		//clearAll();
+		//clearAll(); Why is this here?
 		String str = "";
 		if (noDataNeeded)
 			str = Loader.load(model, currentProgramFile);
@@ -655,9 +671,15 @@ public class MachineView extends Observable
 		}
 	}
 
-	public void reload()
+	public void reload() // Updated
 	{
+		boolean tmp = false;
+		if (noDataNeeded)
+			tmp = true;
+		
 		clearAll();
+		noDataNeeded = tmp;
+			
 		finalLoad_ReloadStep();
 	}
 
