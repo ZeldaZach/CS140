@@ -628,6 +628,7 @@ public class MachineView extends Observable
 		}
 		else if (openOK == JFileChooser.CANCEL_OPTION) // Added to prevent additional dialogs if canceled
 		{
+			System.out.println("Bye");
 			return;
 		}
 
@@ -651,12 +652,14 @@ public class MachineView extends Observable
 				System.out.println("Error writing properties file");
 			}	
 
+			noDataNeeded = false;
 			finalLoad_ReloadStep();
 		} 
 	}		
 
 	private void finalLoad_ReloadStep()
 	{
+		// Save program loaded and data status
 		boolean tmp1 = programLoaded;
 		boolean tmp2 = noDataNeeded;
 
@@ -691,13 +694,8 @@ public class MachineView extends Observable
 		}
 	}
 
-	public void reload() // Updated
+	public void reload()
 	{
-		boolean tmp = noDataNeeded;
-
-		clearAll();
-		noDataNeeded = tmp; // Prevents clearing of noDataNeeded field
-
 		finalLoad_ReloadStep();
 	}
 
