@@ -628,7 +628,6 @@ public class MachineView extends Observable
 		}
 		else if (openOK == JFileChooser.CANCEL_OPTION) // Added to prevent additional dialogs if canceled
 		{
-			System.out.println("Bye");
 			return;
 		}
 
