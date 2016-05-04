@@ -230,18 +230,18 @@ public class MachineView extends Observable
 			sourceDir = properties.getProperty("SourceDirectory");
 			executableDir = properties.getProperty("ExecutableDirectory");
 			dataDir = properties.getProperty("DataDirectory");
-			
+
 			// CLEAN UP ANY ERRORS IN WHAT IS STORED:
 			if (sourceDir == null || sourceDir.length() == 0 
 					|| !new File(sourceDir).exists()) {
 				sourceDir = defaultDir;
 			}
-			
+
 			if (executableDir == null || executableDir.length() == 0 
 					|| !new File(executableDir).exists()) {
 				executableDir = defaultDir;
 			}
-			
+
 			if (dataDir == null || dataDir.length() == 0
 					|| !new File(dataDir).exists()) {
 				dataDir = defaultDir;
@@ -267,7 +267,7 @@ public class MachineView extends Observable
 		cpuViewPanel = new CPUViewPanel(this);
 		menuBarBuilder = new MenuBarBuilder(this);
 		controlPanel = new ControlPanel(this);
-		
+
 		frame.add(codeViewPanel.createCodeDisplay(), BorderLayout.LINE_START);
 
 		JPanel center = new JPanel();
@@ -284,16 +284,16 @@ public class MachineView extends Observable
 		frame.setJMenuBar(bar);
 		bar.add(menuBarBuilder.createFileMenu());
 		bar.add(menuBarBuilder.createExecuteMenu());
-		
+
 		frame.setSize(1200,600);
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(WindowListenerFactory.windowClosingFactory(e -> exit()));
-		
+
 		state = States.NOTHING_LOADED;
 		state.enter();
 		setChanged();
 		notifyObservers();
-		
+
 		timer = new Timer(TICK, e -> {if(autoStepOn) step();});
 		timer.start();
 
@@ -334,8 +334,10 @@ public class MachineView extends Observable
 	public void exit() // method executed when user exits the program
 	{ 
 		int decision = JOptionPane.showConfirmDialog(
-				frame, "Do you really wish to exit?",
-				"Confirmation", JOptionPane.YES_NO_OPTION);
+				frame,
+				"Do you really wish to exit?",
+				"Confirmation",
+				JOptionPane.YES_NO_OPTION);
 
 		if (decision == JOptionPane.YES_OPTION)
 		{
@@ -351,25 +353,14 @@ public class MachineView extends Observable
 			{
 				model.step();
 			}
-			catch (RuntimeException e)
+			catch (CodeAccessException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
 						"Illegal access to code from line " + getPC() + "\n" +
-						"Exception type: " + e.getClass().getSimpleName() + "\n" +
-						"Exception message: " + e.getMessage(),
-						"Run time error",
-						JOptionPane.OK_OPTION);
-			}
-			// Commented out as it's a bit excessive to tell the same thing every time?
-			/*catch (CodeAccessException e)
-			{
-				halt();
-				JOptionPane.showMessageDialog(
-						frame, 
-						"Illegal access to code from line " + getPC() + "\n"
-								+ "Exception message: " + e.getMessage(),
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
 								"Run time error",
 								JOptionPane.OK_OPTION);
 			}
@@ -378,56 +369,67 @@ public class MachineView extends Observable
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"Illegal access to code from line " + getPC() + "\n"
-								+ "Exception message: " + e.getClass().getSimpleName(),
-						"Run time error",
-						JOptionPane.OK_OPTION);
+						"Out of bounds at line " + getPC() + "\n" +
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
+								"Run time error",
+								JOptionPane.OK_OPTION);
 			}
 			catch (NullPointerException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"NULL POINTER ERROR",
-						"Run time error",
-						JOptionPane.OK_OPTION);
+						"Null pointer at line " + getPC() + "\n" +
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
+								"Run time error",
+								JOptionPane.OK_OPTION);
 			}
 			catch (IllegalArgumentException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"ILLEGAL ARG EXCEPTION",
-						"Run time error",
-						JOptionPane.OK_OPTION);
+						"Illegal argument at line " + getPC() + "\n" +
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
+								"Run time error",
+								JOptionPane.OK_OPTION);
 			}
 			catch (IllegalInstructionException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"ILLEGAL INSTRUCTION EXCEPTION",
-						"Run time error",
-						JOptionPane.OK_OPTION);
+						"Illegal instruction at line " + getPC() + "\n" +
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
+								"Run time error",
+								JOptionPane.OK_OPTION);
 			}
 			catch (DivideByZeroException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"DIV BY 0 EXCEPTION",
-						"Run time error",
-						JOptionPane.OK_OPTION);
+						"Attempt to divide by zero at line " + getPC() + "\n" +
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
+								"Run time error",
+								JOptionPane.OK_OPTION);
 			}
 			catch (ParityCheckException e)
 			{
 				halt();
 				JOptionPane.showMessageDialog(
 						frame,
-						"PARITYCHECK EXCEPTION",
-						"Run time error",
-						JOptionPane.OK_OPTION);
-			}*/
+						"Parity bit error at line " + getPC() + "\n" +
+								"Exception type: " + e.getClass().getSimpleName() + "\n" +
+								"Exception message: " + e.getMessage(),
+								"Run time error",
+								JOptionPane.OK_OPTION);
+			}
 
 			setChanged();
 			notifyObservers();
@@ -449,25 +451,14 @@ public class MachineView extends Observable
 				{
 					model.step();
 				}
-				catch (RuntimeException e)
+				catch (CodeAccessException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
 							"Illegal access to code from line " + getPC() + "\n" +
-							"Exception type: " + e.getClass().getSimpleName() + "\n" +
-							"Exception message: " + e.getMessage(),
-							"Run time error",
-							JOptionPane.OK_OPTION);
-				}
-				// Commented out in favor of a quicker alternative
-				/*catch (CodeAccessException e)
-				{
-					halt();
-					JOptionPane.showMessageDialog(
-							frame, 
-							"Illegal access to code from line " + getPC() + "\n"
-									+ "Exception message: " + e.getMessage(),
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
 									"Run time error",
 									JOptionPane.OK_OPTION);
 				}
@@ -476,55 +467,67 @@ public class MachineView extends Observable
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
-							"Array Out of Bounds error?",
-							"Run time error",
-							JOptionPane.OK_OPTION);
+							"Out of bounds at line " + getPC() + "\n" +
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
+									"Run time error",
+									JOptionPane.OK_OPTION);
 				}
 				catch (NullPointerException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
-							"NULL POINTER ERROR",
-							"Run time error",
-							JOptionPane.OK_OPTION);
+							"Null pointer at line " + getPC() + "\n" +
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
+									"Run time error",
+									JOptionPane.OK_OPTION);
 				}
 				catch (IllegalArgumentException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
-							"ILLEGAL ARG EXCEPTION",
-							"Run time error",
-							JOptionPane.OK_OPTION);
+							"Illegal argument at line " + getPC() + "\n" +
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
+									"Run time error",
+									JOptionPane.OK_OPTION);
 				}
 				catch (IllegalInstructionException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
-							"ILLEGAL INSTRUCTION EXCEPTION",
-							"Run time error",
-							JOptionPane.OK_OPTION);
+							"Illegal instruction at line " + getPC() + "\n" +
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
+									"Run time error",
+									JOptionPane.OK_OPTION);
 				}
 				catch (DivideByZeroException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
-							"DIV BY 0 EXCEPTION",
-							"Run time error",
-							JOptionPane.OK_OPTION);
+							"Attempt to divide by zero at line " + getPC() + "\n" +
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
+									"Run time error",
+									JOptionPane.OK_OPTION);
 				}
 				catch (ParityCheckException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
 							frame,
-							"PARITYCHECK EXCEPTION",
-							"Run time error",
-							JOptionPane.OK_OPTION);
-				}*/
+							"Parity bit error at line " + getPC() + "\n" +
+									"Exception type: " + e.getClass().getSimpleName() + "\n" +
+									"Exception message: " + e.getMessage(),
+									"Run time error",
+									JOptionPane.OK_OPTION);
+				}
 			}
 			else
 			{
@@ -543,9 +546,9 @@ public class MachineView extends Observable
 
 	public void loadCode()
 	{
-        programLoaded = false;
-        noDataNeeded = false;
-        
+		programLoaded = false;
+		noDataNeeded = false;
+
 		JFileChooser chooser = new JFileChooser(executableDir);
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Pippin Executable Files", "pexe");
 		chooser.setFileFilter(filter);
@@ -560,7 +563,7 @@ public class MachineView extends Observable
 		{
 			return;
 		}
-		
+
 		if (currentProgramFile != null && currentProgramFile.exists())
 		{
 			// CODE TO REMEMBER WHICH DIRECTORY HAS THE pexe FILES
@@ -574,8 +577,7 @@ public class MachineView extends Observable
 				properties.setProperty("SourceDirectory", sourceDir);
 				properties.setProperty("ExecutableDirectory", executableDir);
 				properties.setProperty("DataDirectory", dataDir);
-				properties.store(new FileOutputStream("propertyfile.txt"), 
-						"File locations");
+				properties.store(new FileOutputStream("propertyfile.txt"), "File locations");
 			}
 			catch (Exception e)
 			{
@@ -656,14 +658,21 @@ public class MachineView extends Observable
 
 	private void finalLoad_ReloadStep()
 	{
-		//clearAll(); Why is this here?
+		boolean tmp1 = programLoaded;
+		boolean tmp2 = noDataNeeded;
+
+		clearAll();
+
+		programLoaded = tmp1;
+		noDataNeeded = tmp2;
+
 		String str = "";
 		if (noDataNeeded)
 			str = Loader.load(model, currentProgramFile);
 		else
 			str = Loader.load(model, currentProgramFile, currentDataFile);
 
-		if (str.equals("success"))
+		if (str != null && str.equals("success"))
 		{
 			model.setRunning(true);
 			setRunning(true);
@@ -685,13 +694,11 @@ public class MachineView extends Observable
 
 	public void reload() // Updated
 	{
-		boolean tmp = false;
-		if (noDataNeeded)
-			tmp = true;
-		
+		boolean tmp = noDataNeeded;
+
 		clearAll();
-		noDataNeeded = tmp;
-			
+		noDataNeeded = tmp; // Prevents clearing of noDataNeeded field
+
 		finalLoad_ReloadStep();
 	}
 
@@ -780,7 +787,7 @@ public class MachineView extends Observable
 			}
 
 			StringBuilder builder = new StringBuilder();
-			int ret = Assembler.assemble(source, outputExe, builder); // Might be buggy
+			int ret = Assembler.assemble(source, outputExe, builder);
 
 			if (ret == 0)
 			{

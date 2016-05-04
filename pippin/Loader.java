@@ -14,8 +14,7 @@ public class Loader
 		{
 			String filename = keyboard.nextLine();
 			MachineModel test = new MachineModel();
-			System.out.println(Loader.load(test, new File(filename + ".pexe"), 
-					new File(filename + ".dat")));
+			System.out.println(Loader.load(test, new File(filename + ".pexe"), new File(filename + ".dat")));
 			int result = 0;
 			test.setRunning(true);
 			while (test.isRunning())
@@ -23,14 +22,12 @@ public class Loader
 				if (result != test.getData(1))
 				{
 					result = test.getData(1);
-					System.out.println("0 => " + test.getData(0) + 
-							"; 1 => " + result);
+					System.out.println("0 => " + test.getData(0) + "; 1 => " + result);
 				}
 				test.step();
 				//the following lines mess up the behavior for positive numbers but
 				//provide an output for 0 or negative data
-				System.out.println("0 => " + test.getData(0) + 
-						"; 1 => " + result);
+				System.out.println("0 => " + test.getData(0) + "; 1 => " + result);
 			}
 		}
 	}
@@ -98,7 +95,7 @@ public class Loader
 			return("File " + program.getName() + " Not Found");
 		}
 	}
-	
+
 	public static String load(MachineModel model, File program)
 	{
 		if (model == null || program == null)
@@ -118,7 +115,7 @@ public class Loader
 
 				parser.close();
 			}
-			
+
 			return "success";
 		}
 		catch (ArrayIndexOutOfBoundsException e)

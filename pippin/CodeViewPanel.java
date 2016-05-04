@@ -42,12 +42,14 @@ public class CodeViewPanel implements Observer
 		panel.setLayout(new BorderLayout());
 		numPanel.setLayout(new GridLayout(0,1));
 		sourcePanel.setLayout(new GridLayout(0,1));
-		for(int i = 0; i < Code.CODE_MAX; i++)
+
+		for (int i = 0; i < Code.CODE_MAX; i++)
 		{
 			numPanel.add(new JLabel(i+": ", JLabel.RIGHT));
 			codeText[i] = new JTextField(10);
 			sourcePanel.add(codeText[i]);
 		}
+
 		Border border = BorderFactory.createTitledBorder(
 				BorderFactory.createLineBorder(Color.BLACK), "Code Memory View",
 				TitledBorder.CENTER, TitledBorder.DEFAULT_POSITION);
@@ -59,7 +61,6 @@ public class CodeViewPanel implements Observer
 		returnPanel.add(scroller);
 		return returnPanel;
 	}
-
 
 	@Override
 	public void update(Observable arg0, Object arg1)

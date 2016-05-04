@@ -19,19 +19,18 @@ public class Assembler
 		noArgument.add("NOT");
 	}
 
-	/*public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		StringBuilder error = new StringBuilder();
 		System.out.println("Enter the name of the file without extension: ");
 		try (Scanner keyboard = new Scanner(System.in))
 		{
 			String filename = keyboard.nextLine();
-			int i = assemble(new File(filename + ".pasm"), 
-					new File(filename + ".pexe"), error);
+			int i = assemble(new File(filename + ".pasm"), new File(filename + ".pexe"), error);
 			System.out.println(i + " " + error);
 		}
-	}*/
-	
+	}
+
 	/**
 	 * Method to assemble a file to its executable representation. 
 	 * If the input has errors one of the errors will be reported 
@@ -70,7 +69,7 @@ public class Assembler
 			{
 				String line = inp.nextLine();
 				lineNum++;
-				
+
 				System.out.println(line);
 
 				if (line.trim().length() == 0 && !blankLineFound) // First blank line
@@ -114,19 +113,19 @@ public class Assembler
 				if (!InstructionMap.opcode.containsKey(parts[0].toUpperCase()))
 				{
 					error.append("Error on line " + (i+1) + ": illegal mnemonic");
-					retVal = i+1; // Added
+					retVal = i+1;
 				}
 				else if (!parts[0].equals(parts[0].toUpperCase()))
 				{
 					error.append("Error on line " + (i+1) + ": mnemonic must be upper case");
-					retVal = i+1; // Added
+					retVal = i+1;
 				}
 				else if (noArgument.contains(parts[0]))
 				{
 					if (parts.length > 1)
 					{
 						error.append("Error on line " + (i+1) + ": this mnemonic cannot take arguements");
-						retVal = i+1; // Added
+						retVal = i+1;
 					}
 					else
 					{
@@ -140,12 +139,12 @@ public class Assembler
 					if (parts.length > 2)
 					{
 						error.append("Error on line " + (i+1) + ": this mnemonic has too many arguments");
-						retVal = i+1; // Added
+						retVal = i+1;
 					}
 					else if (parts.length == 1)
 					{
 						error.append("Error on line " + (i+1) + ": this mnemonic is missing arguments");
-						retVal = i+1; // Added
+						retVal = i+1;
 					}
 					else
 					{
@@ -168,7 +167,7 @@ public class Assembler
 								flags = 6;
 								parts[1] = parts[1].substring(1);
 							}
-							
+
 							int arg = Integer.parseInt(parts[1],16);
 
 							int opPart = 8 * InstructionMap.opcode.get(parts[0]) + flags;
@@ -179,7 +178,7 @@ public class Assembler
 						catch (NumberFormatException e)
 						{
 							error.append("Error on line " + (i+1) + ": argument is not a hex number");
-							retVal = i+1; // Added
+							retVal = i+1;
 						}
 					}
 				}

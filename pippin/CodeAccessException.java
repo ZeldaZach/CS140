@@ -8,7 +8,7 @@ public class CodeAccessException extends RuntimeException
 	{
 		super();
 	}
-	
+
 	public CodeAccessException(String msg)
 	{
 		super(msg);

@@ -40,11 +40,11 @@ public class ControlPanel implements Observer
 		reloadButton.setBackground(Color.WHITE);
 		reloadButton.addActionListener(e -> machineView.reload());
 		returnPanel.add(reloadButton);
-		
+
 		JSlider slider = new JSlider(5,1000);
 		slider.addChangeListener(e -> machineView.setPeriod(slider.getValue()));
 		returnPanel.add(slider);
-		
+
 		return returnPanel;
 	}
 

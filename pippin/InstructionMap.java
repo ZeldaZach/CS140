@@ -29,9 +29,7 @@ public class InstructionMap
 	static
 	{
 		for (String key : opcode.keySet())
-		{
 			mnemonics.put(opcode.get(key), key);
-		}
 	}
 
 }

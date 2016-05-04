@@ -21,7 +21,7 @@ public class MachineModel extends Observable
 
 	public void setCode(int op, int arg)
 	{
-		code.setCode(op,  arg);
+		code.setCode(op, arg);
 	}
 
 	public void setAccum(int i)
@@ -404,7 +404,6 @@ public class MachineModel extends Observable
 
 			halt();
 		};
-
 	}
 
 	private class CPU

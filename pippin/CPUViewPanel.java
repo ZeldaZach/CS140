@@ -14,13 +14,13 @@ public class CPUViewPanel implements Observer
 	private MachineView machineView;
 	private JTextField acc = new JTextField();
 	private JTextField pc = new JTextField();
-	
+
 	public CPUViewPanel(MachineView mv)
 	{
 		machineView = mv;
 		machineView.addObserver(this);
 	}
-	
+
 	public JComponent createCPUDisplay()
 	{
 		JPanel returnPanel = new JPanel();

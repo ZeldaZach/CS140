@@ -100,16 +100,16 @@ public class MemoryViewPanel implements Observer
 				dataDecimal[previousColor].setBackground(Color.WHITE);
 				dataHex[previousColor].setBackground(Color.WHITE);
 			}
-			
+
 			previousColor = machineView.getChangedIndex();
-			
+
 			if (previousColor  >= lower && previousColor < upper)
 			{
 				dataDecimal[previousColor].setBackground(Color.YELLOW);
 				dataHex[previousColor].setBackground(Color.YELLOW);
 			} 
 		}
-		
+
 		if (scroller != null && machineView != null)
 		{
 			JScrollBar bar= scroller.getVerticalScrollBar();

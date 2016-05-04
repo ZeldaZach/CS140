@@ -7,6 +7,6 @@ public class Test
 		Instruction.checkParity(30);
 		Instruction.checkParity(300000);
 		Instruction.checkParity(20000000);
-		Instruction.checkParity(100004);	
+		Instruction.checkParity(100004); // Should throw exception
 	}
 }

@@ -30,27 +30,23 @@ public class MenuBarBuilder implements Observer
 
 		returnMenu.setMnemonic(KeyEvent.VK_F);
 		assemble.setMnemonic(KeyEvent.VK_A);
-		assemble.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_A, ActionEvent.CTRL_MASK));
+		assemble.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		assemble.addActionListener(e -> machineView.assembleFile());
 		returnMenu.add(assemble);
 		load.setMnemonic(KeyEvent.VK_L);
-		load.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		load.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
 		load.addActionListener(e -> machineView.loadCode());
 		returnMenu.add(load);
 
 		data.setMnemonic(KeyEvent.VK_L);
-		data.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_L, ActionEvent.CTRL_MASK));
+		data.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, ActionEvent.CTRL_MASK));
 		data.addActionListener(e -> machineView.loadData());
 		returnMenu.add(data);
 
 
 		returnMenu.addSeparator(); // puts a line across the menu
 		exit.setMnemonic(KeyEvent.VK_E);
-		exit.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
 		exit.addActionListener(e -> machineView.exit());
 		returnMenu.add(exit);
 
@@ -62,8 +58,7 @@ public class MenuBarBuilder implements Observer
 		JMenu menu = new JMenu("Execute");
 		menu.setMnemonic(KeyEvent.VK_X);
 		go.setMnemonic(KeyEvent.VK_G);
-		go.setAccelerator(KeyStroke.getKeyStroke(
-				KeyEvent.VK_G, ActionEvent.CTRL_MASK));
+		go.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
 		go.addActionListener(e -> machineView.execute());
 		menu.add(go);
 		return menu;
