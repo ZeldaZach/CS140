@@ -449,7 +449,19 @@ public class MachineView extends Observable
 				{
 					model.step();
 				}
-				catch (CodeAccessException e)
+				catch (RuntimeException e)
+				{
+					halt();
+					JOptionPane.showMessageDialog(
+							frame,
+							"Illegal access to code from line " + getPC() + "\n" +
+							"Exception type: " + e.getClass().getSimpleName() + "\n" +
+							"Exception message: " + e.getMessage(),
+							"Run time error",
+							JOptionPane.OK_OPTION);
+				}
+				// Commented out in favor of a quicker alternative
+				/*catch (CodeAccessException e)
 				{
 					halt();
 					JOptionPane.showMessageDialog(
@@ -512,7 +524,7 @@ public class MachineView extends Observable
 							"PARITYCHECK EXCEPTION",
 							"Run time error",
 							JOptionPane.OK_OPTION);
-				}
+				}*/
 			}
 			else
 			{
