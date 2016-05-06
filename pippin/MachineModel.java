@@ -100,7 +100,6 @@ public class MachineModel extends Observable
 			int arg = code.getArg(cpu.pc);
 
 			Instruction.checkParity(opPart);
-
 			INSTRUCTIONS[opPart/8].execute(arg, opPart%8);
 		}
 		catch (Exception e)
@@ -117,13 +116,13 @@ public class MachineModel extends Observable
 		//INSTRUCTION_MAP entry for "NOP"
 		INSTRUCTIONS[0] = (arg, flags) -> {
 			flags = flags & 0x6; // remove parity bit that will have been verified
+
 			if (flags != 0)
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") + 
-						(flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
+
 			cpu.pc++;			
 		};
 
@@ -139,10 +138,8 @@ public class MachineModel extends Observable
 				cpu.accum = memory.getData(memory.getData(arg));
 			else // Illegal flag
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			cpu.pc++;
@@ -158,10 +155,8 @@ public class MachineModel extends Observable
 				memory.setData(memory.getData(arg), cpu.accum);
 			else // Illegal flag
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			cpu.pc++;
@@ -186,9 +181,7 @@ public class MachineModel extends Observable
 			flags = flags & 0x6;
 
 			if (cpu.accum == 0)
-			{
 				INSTRUCTIONS[3].execute(arg, flags);
-			}
 			else
 				cpu.pc++;
 		};
@@ -196,18 +189,19 @@ public class MachineModel extends Observable
 		//INSTRUCTION entry for ADD (add)
 		INSTRUCTIONS[0x5] = (arg, flags) -> {
 			flags = flags & 0x6; // remove parity bit that will have been verified
-			if(flags == 0) { // direct addressing
+
+			if (flags == 0) // direct addressing
 				cpu.accum += memory.getData(arg);
-			} else if(flags == 2) { // immediate addressing
+			else if (flags == 2) // immediate addressing
 				cpu.accum += arg;
-			} else if(flags == 4) { // indirect addressing
+			else if (flags == 4) // indirect addressing
 				cpu.accum += memory.getData(memory.getData(arg));				
-			} else { // here the illegal case is "11"
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+			else // here the illegal case is "11"
+			{
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
+
 			cpu.pc++;			
 		};
 
@@ -216,23 +210,15 @@ public class MachineModel extends Observable
 			flags = flags & 0x6;
 
 			if (flags == 0)  // direct addressing
-			{
 				cpu.accum -= memory.getData(arg);
-			}
 			else if (flags == 2) // immediate addressing
-			{ 
 				cpu.accum -= arg;
-			}
 			else if (flags == 4)  // indirect addressing
-			{
-				cpu.accum -= memory.getData(memory.getData(arg));				
-			}
+				cpu.accum -= memory.getData(memory.getData(arg));
 			else  // here the illegal case is "11"
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			cpu.pc++;	
@@ -243,23 +229,15 @@ public class MachineModel extends Observable
 			flags = flags & 0x6;
 
 			if (flags == 0)  // direct addressing
-			{
 				cpu.accum *= memory.getData(arg);
-			}
 			else if (flags == 2) // immediate addressing
-			{ 
 				cpu.accum *= arg;
-			}
 			else if (flags == 4)  // indirect addressing
-			{
-				cpu.accum *= memory.getData(memory.getData(arg));				
-			}
+				cpu.accum *= memory.getData(memory.getData(arg));
 			else  // here the illegal case is "11"
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			cpu.pc++;	
@@ -292,10 +270,8 @@ public class MachineModel extends Observable
 			}
 			else  // here the illegal case is "11"
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			cpu.pc++;	
@@ -321,10 +297,8 @@ public class MachineModel extends Observable
 			}
 			else // Illegal Flags
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") 
-						+ (flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			cpu.pc++;
@@ -336,10 +310,8 @@ public class MachineModel extends Observable
 
 			if (flags != 0)
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") + 
-						(flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			if (cpu.accum == 0)
@@ -356,10 +328,8 @@ public class MachineModel extends Observable
 
 			if (flags != 0)
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") + 
-						(flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			if (memory.getData(arg) < 0)
@@ -376,10 +346,8 @@ public class MachineModel extends Observable
 
 			if (flags != 0)
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") + 
-						(flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			if (memory.getData(arg) == 0)
@@ -390,16 +358,49 @@ public class MachineModel extends Observable
 			cpu.pc++;
 		};
 
+		// INSTRUCTION FOR FOR
+		INSTRUCTIONS[0xD] = (arg, flags) -> {
+			flags = flags & 0x6;
+
+			int oldPC = cpu.pc, total_instruction, total_iterations;
+
+			if (flags == 0) // Direct Addressing
+			{
+				total_instruction = memory.getData(arg) / 0x1000;
+				total_iterations = memory.getData(arg) % 0x1000;
+			}
+			else if (flags == 2) // Immediate Addressing
+			{
+				total_instruction = arg / 0x1000;
+				total_iterations = arg % 0x1000;
+			}
+			else // Illegal Flags
+			{
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
+			}
+
+			// The actual iterations
+			for (int i = 0; i < total_iterations; i++)
+			{
+				cpu.pc = oldPC + 1;
+				for (int j = 0; j < total_instruction; j++)
+					this.step();
+			}
+
+			cpu.pc = oldPC + total_instruction;
+
+
+		};
+
 		// INSTRUCTION FOR HALT (halt execution)
 		INSTRUCTIONS[0xF] = (arg, flags) -> {
 			flags = flags & 0x6;
 
 			if (flags != 0)
 			{
-				String fString = "(" + (flags%8 > 3?"1":"0") + 
-						(flags%4 > 1?"1":"0") + ")";
-				throw new IllegalInstructionException(
-						"Illegal flags for this instruction: " + fString);
+				String fString = "(" + (flags%8 > 3?"1":"0") + (flags%4 > 1?"1":"0") + ")";
+				throw new IllegalInstructionException("Illegal flags for this instruction: " + fString);
 			}
 
 			halt();

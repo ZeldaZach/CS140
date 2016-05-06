@@ -224,7 +224,7 @@ public class MachineView extends Observable
 	private void loadPropertiesFile()
 	{
 		try // load properties file "propertyfile.txt", if it exists
-		{ 
+		{
 			properties = new Properties();
 			properties.load(new FileInputStream("propertyfile.txt"));
 			sourceDir = properties.getProperty("SourceDirectory");

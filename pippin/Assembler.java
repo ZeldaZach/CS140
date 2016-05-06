@@ -70,8 +70,6 @@ public class Assembler
 				String line = inp.nextLine();
 				lineNum++;
 
-				System.out.println(line);
-
 				if (line.trim().length() == 0 && !blankLineFound) // First blank line
 				{
 					firstBlankLineNum = lineNum;
