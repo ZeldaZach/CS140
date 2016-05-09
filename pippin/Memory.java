@@ -13,6 +13,9 @@ public class Memory
 
 	public int getData(int index)
 	{
+		if (index < 0 || index > DATA_SIZE)
+			throw new CodeAccessException("Attempt to get data outside its bounds");
+
 		return data[index];
 	}
 
@@ -23,6 +26,9 @@ public class Memory
 
 	public void setData(int index, int value)
 	{
+		if (index < 0 || index > DATA_SIZE)
+			throw new CodeAccessException("Attempt to set data outside its bounds");
+
 		data[index] = value;
 		changedIndex = index;
 	}

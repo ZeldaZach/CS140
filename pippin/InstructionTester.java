@@ -46,6 +46,73 @@ public class InstructionTester {
 	}
 
 	@Test
+	public void testFOR_immediate(){
+		Instruction instr = machine.get(0xD);
+
+		machine.setCode(0,0);
+		machine.setCode(0,0);
+		machine.setCode(0x11, 1);
+		machine.setCode(0x2b, 1);
+		machine.setCode(0x14, 1);
+
+		machine.setData(0x0, 0xfff);
+		machine.setData(0x1, 0x1);
+		machine.setData(0x2, 0x3);
+
+		dataCopy[0] = 4095;
+		dataCopy[1] = 7;
+		dataCopy[2] = 3;
+		dataCopy[3] = 4;
+		dataCopy[4] = 5;
+		dataCopy[5] = 6;
+		dataCopy[6] = 7;
+		dataCopy[7] = 8;
+
+		machine.setAccum(3);
+		machine.setPC(1);
+		instr.execute(0x3005, 2);
+
+		assertArrayEquals(dataCopy, machine.getData());
+		assertEquals(8, machine.getAccum());
+		assertEquals(4, machine.getPC());
+	}
+
+	@Test
+	public void testFOR_direct(){
+		Instruction instr = machine.get(0xD);
+
+		machine.setCode(0,0);
+		machine.setCode(0,0);
+		machine.setCode(0x11, 1);
+		machine.setCode(0x2b, 1);
+		machine.setCode(0x14, 1);
+
+		machine.setData(0x0, 0x3005);
+		machine.setData(0x1, 0x1);
+		machine.setData(0x2, 0x3);
+
+		dataCopy[0] = 0x3005;
+		dataCopy[1] = 7;
+		dataCopy[2] = 3;
+		dataCopy[3] = 4;
+		dataCopy[4] = 5;
+		dataCopy[5] = 6;
+		dataCopy[6] = 7;
+		dataCopy[7] = 8;
+
+		machine.setAccum(3);
+		machine.setPC(1);
+		instr.execute(0, 0);
+
+		for (int i = 0; i < dataCopy.length; i++)
+			System.out.println(dataCopy[i] + " " + machine.getData(i));
+
+		assertArrayEquals(dataCopy, machine.getData());
+		assertEquals(8, machine.getAccum());
+		assertEquals(4, machine.getPC());
+	}
+
+	@Test
 	// Test whether load is correct with immediate addressing
 	public void testLODI(){
 		Instruction instr = machine.get(0x1);

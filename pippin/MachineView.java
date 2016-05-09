@@ -755,7 +755,7 @@ public class MachineView extends Observable
 			if (outputExe != null)
 			{
 				// CODE TO REMEMBER WHICH DIRECTORY HAS THE pexe FILES
-				executableDir = source.getAbsolutePath();
+				executableDir = outputExe.getAbsolutePath();
 				executableDir = executableDir.replace('\\','/');
 				lastSlash = executableDir.lastIndexOf('/');
 				executableDir = executableDir.substring(0, lastSlash + 1);

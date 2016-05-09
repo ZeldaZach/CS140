@@ -64,6 +64,11 @@ public class MachineModel extends Observable
 		return cpu.pc;
 	}
 
+	public void setPC(int pc)
+	{
+		cpu.pc = pc;
+	}
+
 	public int getAccum()
 	{
 		return cpu.accum;
