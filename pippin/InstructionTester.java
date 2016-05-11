@@ -59,7 +59,7 @@ public class InstructionTester {
 		machine.setData(0x1, 0x1);
 		machine.setData(0x2, 0x3);
 
-		dataCopy[0] = 4095;
+		dataCopy[0] = 0xfff;
 		dataCopy[1] = 7;
 		dataCopy[2] = 3;
 		dataCopy[3] = 4;
@@ -103,9 +103,6 @@ public class InstructionTester {
 		machine.setAccum(3);
 		machine.setPC(1);
 		instr.execute(0, 0);
-
-		for (int i = 0; i < dataCopy.length; i++)
-			System.out.println(dataCopy[i] + " " + machine.getData(i));
 
 		assertArrayEquals(dataCopy, machine.getData());
 		assertEquals(8, machine.getAccum());
